@@ -16,11 +16,15 @@ const WifiList = () => {
     WifiManager.loadWifiList()
       .then((data) => {
         console.log("data====>", data);
-        let arr = [];
-        data.forEach((item) => {
-          arr.push({ label: item.SSID, value: item.SSID });
-        });
-        setAvailableWifiData(arr);
+        if (data.length === 0) {
+          Toast.show("No availbe wifi");
+        } else {
+          let arr = [];
+          data.forEach((item) => {
+            arr.push({ label: item.SSID, value: item.SSID });
+          });
+          setAvailableWifiData(arr);
+        }
       })
       .catch((error) => {
         console.log("error:", error);

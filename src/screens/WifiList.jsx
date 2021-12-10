@@ -4,11 +4,12 @@ import WifiManager from "react-native-wifi-reborn";
 const { height, width } = Dimensions.get("window");
 import RadioForm from "react-native-simple-radio-button";
 import Toast from "react-native-simple-toast";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import CustomButton from "../components/Button";
 import Logo from "../components/Logo";
 
 const WifiList = () => {
+  const isFocused = useIsFocused();
   const navigation = useNavigation();
   const [availableWifiData, setAvailableWifiData] = useState([]);
   const [selectedWifi, setSelectedWifi] = useState("");
@@ -29,7 +30,7 @@ const WifiList = () => {
       .catch((error) => {
         console.log("error:", error);
       });
-  }, []);
+  }, [isFocused]);
 
   const continueClicked = () => {
     if (selectedWifi === "") {
